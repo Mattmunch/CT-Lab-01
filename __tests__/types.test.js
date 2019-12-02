@@ -2,6 +2,7 @@ const {
   isNumber,
   isString,
   castToNumber,
+  castToString,
   isBoolean,
   isArray,
   isObject,
@@ -87,10 +88,18 @@ describe('validator module', () => {
       expect(castToNumber(true)).toEqual(1);
       expect(castToNumber(false)).toEqual(0);
     });
-
     it('throws if value is not castable to number', () => {
       expect(() => castToNumber('hi')).toThrowErrorMatchingSnapshot();
       expect(() => castToNumber({})).toThrowErrorMatchingSnapshot();
+    });
+    it('can cast values to a string', () => {
+      expect(castToString(3)).toEqual('3');
+      expect(castToString('3')).toEqual('3');
+      expect(castToString(true)).toEqual('true');
+      expect(castToString(false)).toEqual('false');
+    });
+    it('throws if value is not castable to String', () => {
+      expect(() => castToString({})).toThrowErrorMatchingSnapshot();
     });
   });
 
