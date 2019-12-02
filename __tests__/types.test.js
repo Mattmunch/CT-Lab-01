@@ -3,6 +3,8 @@ const {
   isString,
   castToNumber,
   castToString,
+  castToBoolean,
+  castToArray,
   isBoolean,
   isArray,
   isObject,
@@ -100,6 +102,24 @@ describe('validator module', () => {
     });
     it('throws if value is not castable to String', () => {
       expect(() => castToString({})).toThrowErrorMatchingSnapshot();
+    });
+    it('can cast values to an array', () => {
+      expect(castToArray(3, 2)).toEqual([3, 2]);
+      expect(castToArray('3')).toEqual(['3']);
+      expect(castToArray(true)).toEqual([true]);
+      expect(castToArray(false)).toEqual([false]);
+      expect(castToArray('bill', 'bob')).toEqual(['bill', 'bob']);
+      expect(castToArray(false)).toEqual([false]);
+    });
+    
+    it('can cast values to a boolean', () => {
+      expect(castToBoolean(3)).toEqual(true);
+      expect(castToBoolean('3')).toEqual(true);
+      expect(castToBoolean(true)).toEqual(true);
+      expect(castToBoolean(false)).toEqual(false);
+    });
+    it('throws if value is not castable to boolean', () => {
+      expect(() => castToBoolean({})).toThrowErrorMatchingSnapshot();
     });
   });
 
